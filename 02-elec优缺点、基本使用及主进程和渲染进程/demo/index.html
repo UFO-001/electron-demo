@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color:red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>hello word</div>
+    <ul id="uls"></ul>
+</body>
+<script>
+    const electron = require('electron')
+    const { ipcRenderer } = electron
+    let uls = document.getElementById('uls')
+    ipcRenderer.on('sendVal',(e,v)=>{
+        console.log(v)
+        let lis = document.createElement('li')
+        lis.innerHTML = v
+        uls.appendChild(lis)
+    })
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color:red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>hello word</div>
+    <ul id="uls"></ul>
+</body>
+<script>
+    const electron = require('electron')
+    const { ipcRenderer } = electron
+    let uls = document.getElementById('uls')
+    ipcRenderer.on('sendVal',(e,v)=>{
+        console.log(v)
+        let lis = document.createElement('li')
+        lis.innerHTML = v + '<span class="del">删除</span>' + '<span class="edi">修改</span>'
+        uls.appendChild(lis)
+        dele()
+    })
+    //删除li
+    function dele(){
+        document.querySelectorAll('.del').forEach(el => {
+            el.addEventListener('click',function(){
+                // console.log('555')
+                this.parentNode.remove()
+            })
+        })
+    }
+</script>
+</html>
